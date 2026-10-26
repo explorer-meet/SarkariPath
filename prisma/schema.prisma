@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Exam {
+  id           String   @id
+  name         String
+  organization String
+  category     String
+  status       String
+  dateLabel    String
+  dateDetail   String
+  verified     Boolean  @default(false)
+  sourceLabel  String
+  sourceUrl    String
+  isDemo       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+}
+
+model StudyMaterial {
+  id       String   @id
+  title    String
+  subject  String
+  detail   String
+  content  String   @default("")
+  type     String
+  duration String
+  premium  Boolean  @default(false)
+  isDemo   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([subject])
+}
+
+model QuizQuestion {
+  id          String       @id
+  prompt      String
+  explanation String
+  isDemo      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  options     QuizOption[]
+}
+
+model QuizOption {
+  id         String       @id
+  questionId String
+  label      String
+  sortOrder  Int
+  isCorrect  Boolean      @default(false)
+  question   QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, sortOrder])
+  @@index([questionId])
+}

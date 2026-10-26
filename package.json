@@ -1,0 +1,35 @@
+{
+  "name": "sarkari-path",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:demo": "node --test tests/demo-api.test.mjs",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "overrides": {
+    "postcss": "^8.5.31"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.7",
+    "dotenv": "^16.6.1",
+    "eslint": "^9.29.0",
+    "eslint-config-next": "^15.5.0",
+    "prisma": "^6.19.3",
+    "typescript": "^5.8.3"
+  }
+}
